@@ -1,10 +1,8 @@
 import names as n
 
 class Stump:
-    decision_dictionary = []
-    feature = 0
-
     def __init__(self, feature):
+        self.decision_dictionary = []
         self.feature = n.col_names[feature]
 
     def learn(self, dataset):

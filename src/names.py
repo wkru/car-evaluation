@@ -3,7 +3,7 @@ col_names = {'buying': 0, 'maint': 1, 'doors': 2, 'persons': 3, 'lug_boot': 4, '
 col_values = [
      {'vhigh': 0, 'high': 1, 'med': 2, 'low': 3},
      {'vhigh': 0, 'high': 1, 'med': 2, 'low': 3},
-     {'2': 0, '3': 1, '4': 2, '5more': 2},
+     {'2': 0, '3': 1, '4': 2, '5more': 3},
      {'2': 0, '4': 1, 'more': 2},
      {'small': 0, 'med': 1, 'big': 2},
      {'low': 0, 'med': 1, 'high': 2}
