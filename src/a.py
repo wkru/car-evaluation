@@ -2,24 +2,31 @@
 import csv
 import numpy
 import stump
+import names as n
+import random as r
 
 raw_data = open("../data/car.data", 'rt')
 reader = csv.reader(raw_data, delimiter=',', quoting=csv.QUOTE_NONE)
 x = list(reader)
 data = numpy.array(x).astype('str')
-print(data.shape)
 
-# create wyrżnięty forest
+s = []
 
-s1 = stump.Stump('maint')
-s2 = stump.Stump('buying')
-s3 = stump.Stump('doors')
-s4 = stump.Stump('persons')
-s5 = stump.Stump('lug_boot')
-s6 = stump.Stump('safety')
-s1.learn(data)
-s2.learn(data)
-s3.learn(data)
-s4.learn(data)
-s5.learn(data)
-s6.learn(data)
+for i in range (0, 1000):
+    a= n.col_names2[r.randint(0,5)];
+    #print(a)
+    s.append(stump.Stump(a))
+
+for st in s:
+    st.learn(r.sample(x,100))
+good_counter = 0
+for row in range(0, int(data.size / 7)):
+    results = []
+    for st in s:
+        results.append(st.evaluate(data[row]))
+    c = numpy.bincount(numpy.array(results)).argmax()
+    d = n.quality_values[data[row][6]]
+    if c == d:
+        good_counter += 1
+print(good_counter)
+
