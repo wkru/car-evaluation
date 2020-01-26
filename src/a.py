@@ -1,32 +1,28 @@
-# Load CSV (using python)
-import csv
-import numpy
-import stump
+import forest
 import names as n
-import random as r
+import datareader as dr
+import validate
+from datetime import datetime
 
-raw_data = open("../data/car.data", 'rt')
-reader = csv.reader(raw_data, delimiter=',', quoting=csv.QUOTE_NONE)
-x = list(reader)
-data = numpy.array(x).astype('str')
+reader = dr.Reader()
+reader.fetch_data()
 
-s = []
+numpy_data = reader.get_numpy_data()
+data = reader.get_data()
 
-for i in range (0, 1000):
-    a= n.col_names2[r.randint(0,5)];
-    #print(a)
-    s.append(stump.Stump(a))
+if numpy_data.__sizeof__() == 0:
+    print("Nie udało się pobrać danych")
+    exit(1)
+if data == []:
+    print("Nie udało się pobrać danych")
+    exit(1)
 
-for st in s:
-    st.learn(r.sample(x,100))
-good_counter = 0
-for row in range(0, int(data.size / 7)):
-    results = []
-    for st in s:
-        results.append(st.evaluate(data[row]))
-    c = numpy.bincount(numpy.array(results)).argmax()
-    d = n.quality_values[data[row][6]]
-    if c == d:
-        good_counter += 1
-print(good_counter)
+forest = forest.Forest(n.NUMBER_OF_STUMPS)
 
+before = datetime.now()
+forest.fit_forest_to_data(n.SIZE_OF_SAMPLE, data)
+after = datetime.now()
+diff = after - before
+print("Czas dostosowania lasu dla całej próbki danych:", "%.3f" % (diff.total_seconds()*1000),'ms')
+
+validate.cross_validate(5, forest, data)
