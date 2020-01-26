@@ -11,5 +11,15 @@ print(data.shape)
 
 # create wyrżnięty forest
 
-s = stump.Stump('maint')
-s.learn(data)
+s1 = stump.Stump('maint')
+s2 = stump.Stump('buying')
+s3 = stump.Stump('doors')
+s4 = stump.Stump('persons')
+s5 = stump.Stump('lug_boot')
+s6 = stump.Stump('safety')
+s1.learn(data)
+s2.learn(data)
+s3.learn(data)
+s4.learn(data)
+s5.learn(data)
+s6.learn(data)
