@@ -3,7 +3,7 @@ import csv
 import numpy
 import stump
 
-raw_data = open("../data/car.names", 'rt')
+raw_data = open("../data/car.data", 'rt')
 reader = csv.reader(raw_data, delimiter=',', quoting=csv.QUOTE_NONE)
 x = list(reader)
 data = numpy.array(x).astype('str')
