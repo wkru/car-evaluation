@@ -26,9 +26,10 @@ def cross_validate(k, model, data):
 
         errors_in_sample_count = model.evaluate_data_set(subset)
         total_errors_count += errors_in_sample_count
-        print("Wskaźnik jakości dla próbki",subset_index,":", errors_in_sample_count)
+        #print("Wskaźnik jakości dla próbki",subset_index,":", errors_in_sample_count)
 
     average_loss = total_errors_count / num_of_subsets
     model.fit_forest_to_data(n.SIZE_OF_SAMPLE,data)
     print("Wskaźnik jakości dla całej próbki:", average_loss)
     print("Poprawnie dopasowano:", "%.2f" % (100-average_loss/size_of_subset*100),"% próbek")
+    return 100-average_loss/size_of_subset*100
