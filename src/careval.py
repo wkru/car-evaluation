@@ -25,4 +25,16 @@ after = datetime.now()
 diff = after - before
 print("Czas dostosowania lasu dla całej próbki danych:", "%.3f" % (diff.total_seconds()*1000),'ms')
 
-validate.cross_validate(5, forest, data)
+mean = 0
+before = datetime.now()
+mean += validate.cross_validate(5, forest, data)
+mean += validate.cross_validate(5, forest, data)
+mean += validate.cross_validate(5, forest, data)
+mean += validate.cross_validate(5, forest, data)
+mean += validate.cross_validate(5, forest, data)
+after = datetime.now()
+diff = after - before
+print("czas:", "%.3f" % (diff.total_seconds()/5),'s')
+print("średnia:", "%.2f" %(mean/5))
+
+exit(0)
