@@ -1,7 +1,5 @@
 """
-Klasa dokonująca walidacji krzyżowej modelu aproksymacyjnego.
-
-Konstruktor jako parametr przyjmuje wartość k i model.
+Funkcja dokonująca walidacji krzyżowej modelu aproksymacyjnego.
 """
 
 import names as n

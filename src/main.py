@@ -1,8 +1,13 @@
 import forest
+import sys
 import names as n
 import datareader as dr
 import validate
 from datetime import datetime
+
+n.FEATURES_NUMBER = int(sys.argv[1])
+n.NUMBER_OF_STUMPS = int(sys.argv[2])
+n.SIZE_OF_SAMPLE = int(sys.argv[3])
 
 reader = dr.Reader()
 reader.fetch_data()
@@ -25,4 +30,10 @@ after = datetime.now()
 diff = after - before
 print("Czas dostosowania lasu dla całej próbki danych:", "%.3f" % (diff.total_seconds()*1000),'ms')
 
-validate.cross_validate(5, forest, data)
+before = datetime.now()
+validate.cross_validate(int(1/n.TEST_DATA_PERCENTAGE), forest, data)
+after = datetime.now()
+diff = after - before
+print("Czas wykonania walidacji:", "%.3f" % (diff.total_seconds()),'s')
+
+exit()
