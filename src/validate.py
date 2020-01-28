@@ -4,6 +4,7 @@ Funkcja dokonująca walidacji krzyżowej modelu aproksymacyjnego.
 
 import names as n
 import random as r
+import numpy as np
 
 
 def cross_validate(k, model, data):
@@ -11,6 +12,7 @@ def cross_validate(k, model, data):
     num_of_subsets = k
     size_of_subset = n.NUM_OF_ROWS/k
     total_errors_count = 0
+    confusion_matrix = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
     for subset_index in range(0, num_of_subsets):
         starting_point = int(subset_index*size_of_subset)
@@ -24,10 +26,13 @@ def cross_validate(k, model, data):
         model.fit_forest_to_data(n.SIZE_OF_SAMPLE, data_to_learn_from)
         subset = data[starting_point:ending_point]
 
-        errors_in_sample_count = model.evaluate_data_set(subset)
+        errors_in_sample_count = model.evaluate_data_set(subset, confusion_matrix)
         total_errors_count += errors_in_sample_count
         #print("Wskaźnik jakości dla próbki",subset_index,":", errors_in_sample_count)
 
+    numpy_cm = np.array(confusion_matrix)
+    print("Confusion matrix:")
+    print(numpy_cm)
     average_loss = total_errors_count / num_of_subsets
     model.fit_forest_to_data(n.SIZE_OF_SAMPLE,data)
     print("Wskaźnik jakości dla całej próbki:", average_loss)

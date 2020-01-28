@@ -12,9 +12,9 @@ col_values = [
 quality_values = {'unacc': 0, 'acc': 1, 'good': 2, 'vgood': 3}
 quality_numbers = [1210, 384, 69, 65]
 
-FEATURES_NUMBER = 1 #F
-NUMBER_OF_STUMPS = 500 #N
-SIZE_OF_SAMPLE = 95 #S
+FEATURES_NUMBER = 3 #F
+NUMBER_OF_STUMPS = 1000 #N
+SIZE_OF_SAMPLE = 20 #S
 NUM_OF_ROWS = 1728
 TEST_DATA_PERCENTAGE = 0.2
 INDEX_OF_Y = 6

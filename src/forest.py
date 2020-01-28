@@ -36,10 +36,13 @@ class Forest:
         result = numpy.bincount(numpy.array(results)).argmax()
         return result
 
-    def evaluate_data_set(self, data_rows_with_check):
+    def evaluate_data_set(self, data_rows_with_check, confusion_matrix):
         error_count = 0
         for row in data_rows_with_check:
             result = self.evaluate_data(row)
             if result != n.quality_values[row[n.INDEX_OF_Y]]:
                 error_count += 1
+                i = result
+                j = n.quality_values[row[n.INDEX_OF_Y]]
+                confusion_matrix[i][j] += 1
         return error_count
